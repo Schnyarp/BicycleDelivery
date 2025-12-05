@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>bicycle.delivery — Premium Domain For Sale</title>
+  <meta name="description" content="bicycle.delivery — premium domain ideal for local delivery startups, eco-friendly couriers, last-mile logistics, and bike-based fulfillment. Submit an offer to purchase." />
+  <meta property="og:title" content="bicycle.delivery — Premium Domain For Sale" />
+  <meta property="og:description" content="bicycle.delivery — premium domain for bike couriers, eco delivery services, last-mile logistics and on-demand bicycle deliveries. Contact domain@bicycle.delivery" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b6b63" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <style>
+    :root{
+      --max-width:1100px;
+      --content-width:760px;
+      --panel:#ffffff;
+      --muted:#6b7782;
+      --accent-day:#ffb84d;   /* sunrise/yellow */
+      --accent-bike:#00a3c4;  /* energetic teal */
+      --text:#062427;
+      --bg-deep:#071826;
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:32px;
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background:
+        radial-gradient(900px 420px at 10% 10%, rgba(0,163,196,0.04), transparent 12%),
+        linear-gradient(180deg,#f7fbff 0%, #eef9fb 40%, #fffefc 100%);
+      overflow-x:hidden;
+      line-height:1.45;
+    }
+
+    /* Chosen look: urban, active, ecological — skyline map, route lines, and moving bike motifs */
+    .bg {
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      mix-blend-mode:screen;
+    }
+
+    /* soft map grid / street hint using SVG data url */
+    .map-grid {
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'><g stroke='%23000000' stroke-opacity='0.04' stroke-width='1'><path d='M0 40h240M0 120h240M0 200h240M40 0v240M120 0v240M200 0v240'/></g></svg>");
+      background-repeat:repeat;
+      background-size:360px 360px;
+      opacity:0.95;
+      transform: translateZ(0);
+    }
+
+    /* route lines */
+    .routes {
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+    }
+    .route-path {
+      position:absolute;
+      width:120%;
+      height:120%;
+      left:-10%;
+      top:-10%;
+      background: radial-gradient(circle at 15% 20%, rgba(255,184,77,0.06), transparent 6%),
+                  radial-gradient(circle at 85% 80%, rgba(0,163,196,0.05), transparent 6%);
+      opacity:0.9;
+      mix-blend-mode: screen;
+    }
+
+    /* moving bike icons (created by JS) */
+    .bikes {
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      overflow:visible;
+    }
+
+    .bike {
+      position:absolute;
+      width:64px;
+      height:40px;
+      background-size:contain;
+      background-repeat:no-repeat;
+      will-change: transform, opacity;
+      opacity:0.9;
+      filter: drop-shadow(0 12px 24px rgba(6,18,20,0.12));
+    }
+
+    @keyframes bikeRide {
+      from { transform: translateX(-18vw) translateY(0) rotate(-6deg); }
+      to { transform: translateX(118vw) translateY(8vh) rotate(6deg); }
+    }
+
+    /* spotlight / warm glow behind content to create 'street at dawn' ambiance */
+    .spot {
+      position:fixed;
+      left:50%;
+      top:18%;
+      width:1200px;
+      height:520px;
+      transform:translateX(-50%);
+      background: radial-gradient(closest-side, rgba(255,184,77,0.03), transparent 35%);
+      filter: blur(30px);
+      pointer-events:none;
+      z-index:0;
+      mix-blend-mode: screen;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      padding:34px;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.995), rgba(250,252,253,0.995));
+      box-shadow: 0 30px 90px rgba(6,18,20,0.06);
+      border: 1px solid rgba(6,18,20,0.03);
+      position:relative;
+      z-index:2;
+    }
+
+    header{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:20px;
+    }
+
+    .brand{ display:flex; gap:16px; align-items:center; }
+    .logo{
+      width:80px;
+      height:80px;
+      border-radius:14px;
+      background: linear-gradient(135deg,var(--accent-bike),var(--accent-day));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#07121a;
+      font-weight:800;
+      font-size:20px;
+      box-shadow: 0 12px 36px rgba(0,163,196,0.08);
+      flex-shrink:0;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+
+    h1{ margin:0; font-size:28px; color:var(--text); }
+    p.lead{ margin:6px 0 0; color:var(--muted); font-size:14px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:28px;
+      align-items:start;
+    }
+
+    .hero {
+      background: linear-gradient(90deg, rgba(0,163,196,0.03), rgba(255,184,77,0.02));
+      padding:16px 18px;
+      border-radius:12px;
+      color:var(--accent-bike);
+      margin-bottom:16px;
+      border:1px solid rgba(0,163,196,0.04);
+    }
+    .hero p{ margin:0; font-size:15px; color:var(--text); }
+
+    .panel{
+      background: var(--panel);
+      padding:22px;
+      border-radius:14px;
+      box-shadow: 0 10px 30px rgba(6,18,20,0.04);
+      border: 1px solid rgba(6,18,20,0.02);
+      color:var(--text);
+      max-width:var(--content-width);
+    }
+
+    h2{ margin-top:0; font-size:20px; color:var(--text); }
+    .features ul{ margin:0; padding-left:18px; color:var(--muted); }
+    .features li{ margin-bottom:10px; }
+
+    .cta-row{ display:flex; gap:12px; margin-top:18px; flex-wrap:wrap; align-items:center; }
+    .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 16px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      text-decoration:none;
+      border:0;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent-day),var(--accent-bike));
+      color:#07121a;
+      box-shadow: 0 10px 30px rgba(0,163,196,0.12);
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid rgba(6,18,20,0.06);
+      color:var(--muted);
+    }
+
+    .price { margin-top:14px; font-weight:700; color:var(--text); font-size:16px; }
+    .muted-small { color:var(--muted); font-size:13px; margin-top:6px; }
+
+    .contact-card{
+      position:sticky;
+      top:32px;
+      align-self:start;
+      background: linear-gradient(180deg, rgba(255,255,255,0.995), rgba(255,255,255,0.98));
+      padding:18px;
+      border-radius:12px;
+      border:1px solid rgba(6,18,20,0.03);
+      box-shadow: 0 8px 26px rgba(6,18,20,0.035);
+      max-width:360px;
+    }
+
+    .contact-card h3{ margin:0 0 8px 0; font-size:16px; color:var(--text); }
+    .contact-email, .contact-email a{
+      white-space:nowrap;
+      display:inline-block;
+      font-weight:700;
+      color:var(--accent-bike);
+      word-break: normal;
+      font-size:0.98rem;
+      text-decoration:none;
+    }
+
+    form label{ display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
+    form input, form textarea {
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(6,18,20,0.06);
+      background:#fff;
+      color:var(--text);
+      font-size:14px;
+      margin-bottom:12px;
+    }
+    form textarea{ min-height:110px; resize:vertical; }
+
+    footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
+
+    @media (max-width:980px){
+      .grid{ grid-template-columns: 1fr; gap:18px; }
+      .contact-card{ position:relative; top:auto; width:100%; max-width:none; }
+      .container{ padding:24px; }
+      .logo{ width:64px; height:64px; border-radius:12px; }
+      h1{ font-size:22px; }
+    }
+
+    /* small motion utility for bike label text */
+    .sr-only { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "url":"https://bicycle.delivery",
+        "name":"bicycle.delivery",
+        "description":"bicycle.delivery — premium domain for bike couriers, last-mile delivery startups, eco-friendly courier networks and on-demand bicycle delivery services."
+      },
+      {
+        "@type":"ContactPoint",
+        "contactType":"sales",
+        "email":"domain@bicycle.delivery"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="map-grid" aria-hidden="true"></div>
+    <div class="routes" aria-hidden="true"><div class="route-path"></div></div>
+    <div class="spot" aria-hidden="true"></div>
+    <div class="bikes" aria-hidden="true" id="bikes"></div>
+  </div>
+
+  <main class="container" role="main" aria-labelledby="main-heading">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">BD</div>
+        <div>
+          <h1 id="main-heading">bicycle.delivery</h1>
+          <p class="lead">Premium domain for bike couriers, last-mile delivery, eco-friendly logistics and on-demand neighborhood delivery services.</p>
+        </div>
+      </div>
+
+      <div style="text-align:right">
+        <div style="color:var(--muted);font-size:13px">For inquiries</div>
+        <div class="contact-email"><a href="mailto:domain@bicycle.delivery">domain@bicycle.delivery</a></div>
+      </div>
+    </header>
+
+    <div class="hero" role="note" aria-live="polite">
+      <p>
+        Bicycle.Delivery pairs immediate clarity with a modern look — great for startups and operators building sustainable last-mile logistics, local couriers, and app-driven bike delivery services.
+      </p>
+    </div>
+
+    <section class="grid" aria-label="Main content">
+      <div>
+        <article class="panel" aria-labelledby="why-title">
+          <h2 id="why-title">Why bicycle.delivery?</h2>
+          <p class="lead">A descriptive, industry-targeted domain that signals speed, locality and sustainability. Works well for consumer apps, B2B fleet management, courier networks, and logistics marketplaces focused on bicycles.</p>
+
+          <div class="features" style="margin-top:12px">
+            <ul>
+              <li>Clear category signal — customers and partners understand the service immediately</li>
+              <li>Perfect for last-mile apps, bike courier networks, eco-delivery services and urban logistics</li>
+              <li>Strong branding potential for city-focused rollouts and sustainable delivery marketing</li>
+            </ul>
+
+            <p style="margin-top:12px"><a href="https://corelli.com/domains.html" style="color:var(--accent-day)">How to Choose A Domain Name</a></p>
+          </div>
+
+          <div class="cta-row" role="group" aria-label="Actions">
+            <a class="btn btn-primary" href="#" id="inquireBtn">Make an Offer</a>
+            <a class="btn btn-ghost" href="mailto:domain@bicycle.delivery?subject=Domain%20Offer%20-%20bicycle.delivery">Email Now</a>
+          </div>
+
+          <div class="price">Domain: bicycle.delivery</div>
+          <div class="muted-small">Serious offers only. Transfer via escrow recommended for secure and trusted transfer.</div>
+        </article>
+
+        <article class="panel" style="margin-top:18px" aria-labelledby="about-title">
+          <h3 id="about-title" style="margin-top:0">About this domain</h3>
+          <p class="lead">Bicycle.Delivery is ideal for founders building customer-facing delivery apps, courier marketplaces, urban logistics solutions, or sustainability-first delivery services using bicycles and e-bikes.</p>
+
+          <ul style="color:var(--muted);margin-top:12px">
+            <li>Great for consumer apps, fleet management platforms and courier networks</li>
+            <li>Useful for last-mile logistics pilots, e-bike fleets, and retail delivery programs</li>
+            <li>Transfer-ready — escrow recommended to ensure a secure and verifiable transaction</li>
+          </ul>
+        </article>
+      </div>
+
+      <aside class="contact-card" aria-label="Contact & offer">
+        <div>
+          <h3 style="margin-top:0">Contact & Offer</h3>
+          <p style="margin-top:6px;color:var(--muted)">Submit an offer — this form opens your email client with the details prefilled. Or email <a href="mailto:domain@bicycle.delivery" class="contact-email">domain@bicycle.delivery</a>.</p>
+
+          <form id="inquiryForm" onsubmit="handleSubmit(event)" aria-label="Domain offer form">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+            <label for="offer">Your offer (USD)</label>
+            <input id="offer" name="offer" type="text" placeholder="Enter your offer (USD)" required />
+
+            <label for="company">Company (optional)</label>
+            <input id="company" name="company" type="text" placeholder="Your company or organization" />
+
+            <label for="country">Country</label>
+            <input id="country" name="country" type="text" placeholder="Your country" required />
+
+            <label for="phone">Phone number (optional)</label>
+            <input id="phone" name="phone" type="tel" />
+
+            <label for="message">Message (questions, timeline, escrow preference)</label>
+            <textarea id="message" name="message" placeholder="Hi — I'm submitting an offer for bicycle.delivery. Please share transfer instructions and next steps."></textarea>
+
+            <button class="btn btn-primary" type="submit" style="width:100%; margin-top:6px">Send Offer</button>
+          </form>
+
+          <footer style="margin-top:10px; text-align:left; color:var(--muted); font-size:13px">
+            Prefer a direct email? <a href="mailto:domain@bicycle.delivery" style="color:var(--accent-bike)" class="contact-email">domain@bicycle.delivery</a>
+          </footer>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      &copy; 2025 bicycle.delivery. All rights reserved.
+    </footer>
+  </main>
+
+  <script>
+    // Create a handful of animated bike icons moving along varied paths to give life to the background
+    (function createBikes(){
+      const container = document.getElementById('bikes');
+      if(!container) return;
+
+      // small inline SVG bike (teal) and courier bag (sun)
+      const bikeSVG = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'><g fill='none' fill-rule='evenodd'><circle cx='12' cy='28' r='8' fill='%2300A3C4'/><circle cx='44' cy='28' r='8' fill='%2300A3C4'/><path d='M12 28h20l8-12 8 0' stroke='%23000' stroke-width='1' opacity='0.06'/><rect x='28' y='6' width='18' height='8' rx='2' fill='%23FFB84D' opacity='0.95'/></g></svg>`);
+      const bikeCount = 6;
+
+      for(let i=0;i < bikeCount; i++){
+        const el = document.createElement('div');
+        el.className = 'bike';
+        el.style.backgroundImage = `url("data:image/svg+xml;utf8,${bikeSVG}")`;
+        // random starting vertical position and left offset
+        const startTop = 8 + Math.random()*72; // vh
+        const delay = Math.random()*-10;
+        const dur = 12 + Math.random()*14;
+        el.style.top = startTop + 'vh';
+        el.style.left = (-8 - Math.random()*12) + 'vw';
+        el.style.transform = `scale(${0.7 + Math.random()*0.6})`;
+        el.style.opacity = 0.7 + Math.random()*0.25;
+        el.style.animation = `bikeRide ${dur}s linear ${delay}s infinite`;
+        container.appendChild(el);
+      }
+    })();
+
+    // Compose mailto URL from the form and open user's email client
+    function handleSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const offer = document.getElementById('offer').value.trim();
+      const company = document.getElementById('company').value.trim();
+      const country = document.getElementById('country').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const subject = encodeURIComponent('Domain Offer - bicycle.delivery');
+      const bodyText =
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Company: ${company || '(not provided)'}\n` +
+        `Offer (USD): ${offer}\n` +
+        `Country: ${country}\n` +
+        `Phone: ${phone || '(not provided)'}\n\n` +
+        `Message:\n${message}\n\n---\nSent from bicycle.delivery offer form`;
+
+      const body = encodeURIComponent(bodyText);
+      const mailto = `mailto:domain@bicycle.delivery?subject=${subject}&body=${body}`;
+      window.location.href = mailto;
+    }
+
+    document.getElementById('inquireBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      const form = document.getElementById('inquiryForm');
+      if(window.innerWidth < 900){
+        form.scrollIntoView({behavior:'smooth', block:'center'});
+        form.querySelector('input').focus();
+      } else {
+        const subject = encodeURIComponent('Domain Offer - bicycle.delivery');
+        const body = encodeURIComponent('Hi — I would like to make an offer for bicycle.delivery. Please reply with transfer instructions and next steps.');
+        window.location.href = `mailto:domain@bicycle.delivery?subject=${subject}&body=${body}`;
+      }
+    });
+  </script>
+</body>
+</html>
